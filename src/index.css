@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --sat: env(safe-area-inset-top);
+  --sab: env(safe-area-inset-bottom);
+  --sal: env(safe-area-inset-left);
+  --sar: env(safe-area-inset-right);
+
+  /* Dark theme tokens (default) */
+  --bg: #0b0b0e;
+  --card: 22, 22, 28;
+  --card-opacity: 0.75;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-top: rgba(255, 255, 255, 0.14);
+  --text-primary: #ededf0;
+  --text-secondary: #8a8a93;
+  --accent: #931a25;
+  --accent-light: #a8202e;
+  --accent-secondary: #3b4e6b;
+}
+
+:root.light {
+  --bg: #f6f6f8;
+  --card: 255, 255, 255;
+  --card-opacity: 0.85;
+  --border: rgba(0, 0, 0, 0.06);
+  --border-top: rgba(0, 0, 0, 0.1);
+  --text-primary: #121215;
+  --text-secondary: #686872;
+  --accent: #841822;
+  --accent-light: #931a25;
+  --accent-secondary: #2b3b52;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior-y: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Faint angular geometry background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: linear-gradient(115deg, transparent 60%, rgba(255, 255, 255, 0.02) 60.2%, transparent 61%),
+    linear-gradient(75deg, transparent 30%, rgba(255, 255, 255, 0.02) 30.2%, transparent 31%),
+    linear-gradient(160deg, transparent 80%, rgba(147, 26, 37, 0.03) 80.2%, transparent 81%);
+}
+
+:root.light body::before {
+  background-image: linear-gradient(115deg, transparent 60%, rgba(0, 0, 0, 0.02) 60.2%, transparent 61%),
+    linear-gradient(75deg, transparent 30%, rgba(0, 0, 0, 0.02) 30.2%, transparent 31%),
+    linear-gradient(160deg, transparent 80%, rgba(132, 24, 34, 0.03) 80.2%, transparent 81%);
+}
+
+@layer components {
+  .glass-card {
+    background: rgba(var(--card), var(--card-opacity));
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--border);
+    border-top: 1px solid var(--border-top);
+  }
+
+  .glass-nav {
+    background: rgba(var(--card), 0.85);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    backdrop-filter: blur(24px) saturate(180%);
+    border-top: 1px solid var(--border);
+  }
+}
+
+@layer utilities {
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .txt-primary {
+    color: var(--text-primary);
+  }
+  .txt-secondary {
+    color: var(--text-secondary);
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Range input reset for numeric feel */
+input,
+textarea,
+button,
+select {
+  font-family: inherit;
+}
